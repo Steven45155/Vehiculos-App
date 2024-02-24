@@ -1,0 +1,43 @@
+
+<div class="flex flex-column p-2">
+  <h3>Buscador</h3>
+  <mat-form-field >
+    <mat-label>Buscador de heroes</mat-label>
+    <input type="text" matInput [formControl]="searchInput" (input)="searchHero()" [matAutocomplete]="auto">
+
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
+      (optionSelected)="onSelectedOption( $event )">
+      <mat-option *ngFor="let options of heroes" [value]="options">
+        {{options.superhero}}
+      </mat-option>
+      <mat-option *ngIf="heroes.length==0 && searchInput.value!.length > 0">
+        No se encontró nada con el término {{searchInput.value}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+</div>
+
+<div class="grid" *ngIf="visual==true">
+  <mat-card class="col-12 sm:col-6">
+    <img [src]="selectHero!|heroImage" [alt]="">
+  </mat-card>
+
+  <mat-card class="col-12 sm:col-6">
+    <mat-card-header>
+      <mat-card-title>Héroe:{{selectHero?.superhero}}</mat-card-title>
+    </mat-card-header>
+    <mat-list>
+      <strong>Nombre:</strong>
+      <mat-list-item>{{selectHero?.alter_ego}}</mat-list-item>
+      <strong>Personajes:</strong>
+      <mat-list-item>
+        <mat-chip>{{selectHero?.characters}}</mat-chip>
+      </mat-list-item>
+      <strong>Primera aparición:</strong>
+      <mat-list-item>{{selectHero?.first_appearance}}</mat-list-item>
+      <strong>Creador:</strong>
+      <mat-list-item>{{selectHero?.publisher}}</mat-list-item>
+    </mat-list>
+  </mat-card>
+</div>

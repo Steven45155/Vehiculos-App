@@ -1,0 +1,46 @@
+
+<div>
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{heroes.superhero}}</mat-card-title>
+    <mat-card-subtitle>{{heroes.alter_ego}}</mat-card-subtitle>
+  </mat-card-header>
+
+  <!-- TODO: imagen -->
+
+  <img mat-card-image [src]="heroes | heroImage" [alt]="heroes.superhero">
+
+  <mat-card-content>
+    <h4>{{heroes.publisher}}</h4>
+    <p>
+      <strong>Primera apareción:</strong>{{heroes.first_appearance}}
+      <br>
+      <mat-chip-listbox>
+        <mat-chip *ngFor="let name of heroes.characters.split(',') | slice:0:1">
+          {{name}}
+        </mat-chip>
+      </mat-chip-listbox>
+    </p>
+  </mat-card-content>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-actions>
+    <button mat-button mat-raised color="primary" [routerLink]="['/heroes/edit', heroes.id]">
+      <mat-icon>edit</mat-icon>
+      Editar
+    </button>
+
+    <span class="spacer"></span>
+
+    <button mat-button mat-raised [routerLink]="['/heroes', heroes.id]">
+      <mat-icon>more_horiz</mat-icon>
+      Más
+    </button>
+
+  </mat-card-actions>
+
+</mat-card>
+
+</div>
